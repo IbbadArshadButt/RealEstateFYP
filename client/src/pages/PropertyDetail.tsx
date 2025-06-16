@@ -39,6 +39,10 @@ import { Label } from "@/components/ui/label";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://realestatefyp.onrender.com/api'
+  : 'http://localhost:5000/api';
+
 const PropertyDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -108,7 +112,7 @@ const PropertyDetail = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/messages', {
+      const response = await fetch(`${API_BASE_URL}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -165,7 +169,7 @@ const PropertyDetail = () => {
 
     try {
       const scheduleDate = new Date(scheduleForm.date);
-      const response = await fetch('http://localhost:5000/api/messages', {
+      const response = await fetch(`${API_BASE_URL}/messages`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

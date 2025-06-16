@@ -38,6 +38,10 @@ interface Message {
   status: 'unread' | 'read';
 }
 
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://realestatefyp.onrender.com/api'
+  : 'http://localhost:5000/api';
+
 const AgentDashboard = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -96,7 +100,7 @@ const AgentDashboard = () => {
       const token = localStorage.getItem('token');
       
       // Try to fetch real messages from the API with auth token
-      const response = await fetch(`http://localhost:5000/api/messages/agent/${user?._id}`, {
+      const response = await fetch(`${API_BASE_URL}/messages/agent/${user?._id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -180,7 +184,7 @@ const AgentDashboard = () => {
 
   const markMessageAsRead = async (messageId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/messages/${messageId}/read`, {
+      const response = await fetch(`${API_BASE_URL}/messages/${messageId}/read`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
