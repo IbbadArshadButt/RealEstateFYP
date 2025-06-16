@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => ({
     proxy: {
       '/api': {
         target: mode === 'production' 
-          ? 'https://zameen-echo-homes.onrender.com'
+          ? 'https://realestatefyp.onrender.com'
           : 'http://localhost:5000',
         changeOrigin: true,
         secure: mode === 'production',

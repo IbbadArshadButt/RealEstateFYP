@@ -9,11 +9,13 @@ import {
 } from '../types';
 
 // Update API URL to match your backend
-const API_URL = 'http://localhost:5000/api';
+const API_URL = process.env.NODE_ENV === 'production'
+  ? 'https://realestatefyp.onrender.com/api'
+  : 'http://localhost:5000/api';
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: API_URL,
   headers: {
     'Accept': 'application/json'
   }
