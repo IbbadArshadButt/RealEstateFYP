@@ -38,6 +38,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import PropertyMap from '@/components/PropertyMap';
 
 const API_BASE_URL = process.env.NODE_ENV === 'production'
   ? 'https://realestatefyp.onrender.com/api'
@@ -463,9 +464,13 @@ Notes: ${scheduleForm.notes}`
                   </TabsContent>
                   
                   <TabsContent value="location" className="mt-6">
-                    <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
-                      <p className="text-gray-600">Map will be available soon</p>
-                    </div>
+                    {property?.location ? (
+                      <PropertyMap location={property.location} />
+                    ) : (
+                      <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center">
+                        <p className="text-gray-600">Location not available</p>
+                      </div>
+                    )}
                   </TabsContent>
                 </Tabs>
               </CardContent>
