@@ -37,6 +37,22 @@ const Agents = () => {
     }
   };
 
+  const handleCallAgent = (phone: string) => {
+    window.location.href = `tel:${phone}`;
+  };
+
+  const handleEmailAgent = (email: string) => {
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Agent's email is not available",
+        variant: "destructive",
+      });
+      return;
+    }
+    window.location.href = `mailto:${email}`;
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -131,12 +147,22 @@ const Agents = () => {
                   {/* Contact Buttons */}
                   <div className="space-y-2">
                     {agent.phone && (
-                      <Button variant="outline" className="w-full" size="sm">
+                      <Button 
+                        variant="outline" 
+                        className="w-full" 
+                        size="sm"
+                        onClick={() => handleCallAgent(agent.phone!)}
+                      >
                         <Phone className="w-4 h-4 mr-2" />
                         Call Agent
                       </Button>
                     )}
-                    <Button variant="outline" className="w-full" size="sm">
+                    <Button 
+                      variant="outline" 
+                      className="w-full" 
+                      size="sm"
+                      onClick={() => handleEmailAgent(agent.email)}
+                    >
                       <Mail className="w-4 h-4 mr-2" />
                       Email Agent
                     </Button>

@@ -13,7 +13,7 @@ const getAllProperties = async (req, res) => {
     }
     
     const properties = await Property.find(query)
-      .populate('agent', 'name email phone role')
+      .populate('agent', 'name email phone role profileImage')
       .sort({ createdAt: -1 });
     
     console.log(`Found ${properties.length} properties`);
@@ -28,7 +28,7 @@ const getAllProperties = async (req, res) => {
 const getProperty = async (req, res) => {
   try {
     const property = await Property.findById(req.params.id)
-      .populate('agent', 'name email phone role');
+      .populate('agent', 'name email phone role profileImage');
     
     if (!property) {
       return res.status(404).json({ message: 'Property not found' });
@@ -55,7 +55,7 @@ const createProperty = async (req, res) => {
 
     // Populate agent details before sending response
     const populatedProperty = await Property.findById(property._id)
-      .populate('agent', 'name email phone role');
+      .populate('agent', 'name email phone role profileImage');
 
     console.log('Property created:', populatedProperty);
     res.status(201).json(populatedProperty);
@@ -83,7 +83,7 @@ const updateProperty = async (req, res) => {
       req.params.id,
       req.body,
       { new: true }
-    ).populate('agent', 'name email phone role');
+    ).populate('agent', 'name email phone role profileImage');
 
     res.json(updatedProperty);
   } catch (error) {

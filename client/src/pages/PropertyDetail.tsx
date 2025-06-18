@@ -386,14 +386,9 @@ Notes: ${scheduleForm.notes}`
               <CardContent>
                 {property.agent && typeof property.agent !== 'string' ? (
                   <>
-                    <div className="flex items-center mb-4">
-                      <img
-                        src={property.agent.profileImage || "https://placehold.co/100x100?text=Agent"}
-                        alt={property.agent.name}
-                        className="w-12 h-12 rounded-full mr-3"
-                      />
+                    <div className="mb-4">
                       <div>
-                        <div className="font-semibold">{property.agent.name}</div>
+                        <div className="font-semibold text-lg">{property.agent.name}</div>
                         <div className="text-sm text-gray-600">Real Estate Agent</div>
                       </div>
                     </div>

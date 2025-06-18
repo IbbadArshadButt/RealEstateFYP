@@ -32,7 +32,15 @@ const userSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true,
-  toJSON: { virtuals: true },
+  toJSON: { virtuals: true, transform: function(doc, ret) {
+    // Add full URL for profileImage if it exists
+    if (ret.profileImage) {
+      ret.profileImage = ret.profileImage.startsWith('http') 
+        ? ret.profileImage 
+        : `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/${ret.profileImage}`;
+    }
+    return ret;
+  }},
   toObject: { virtuals: true }
 });
 
