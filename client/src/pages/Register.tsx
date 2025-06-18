@@ -29,8 +29,24 @@ const Register = () => {
     setFormData(prev => ({ ...prev, role: value }));
   };
 
+  const validatePassword = (password: string) => {
+    const hasMinLength = password.length >= 8;
+    const hasNumber = /\d/.test(password);
+    return hasMinLength && hasNumber;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validatePassword(formData.password)) {
+      toast({
+        title: 'Invalid Password',
+        description: 'Password must be at least 8 characters long and contain at least one number',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -116,6 +132,9 @@ const Register = () => {
                   value={formData.password}
                   onChange={handleChange}
                 />
+                <p className="mt-1 text-sm text-gray-500">
+                  Password must be at least 8 characters long and contain at least one number
+                </p>
               </div>
             </div>
 
@@ -146,6 +165,7 @@ const Register = () => {
                   name="phone"
                   type="tel"
                   autoComplete="tel"
+                  required
                   value={formData.phone}
                   onChange={handleChange}
                 />

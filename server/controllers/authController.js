@@ -7,6 +7,13 @@ const register = async (req, res) => {
   try {
     const { name, email, password, role, phone } = req.body;
 
+    // Password validation
+    if (!password || password.length < 8 || !/\d/.test(password)) {
+      return res.status(400).json({
+        message: 'Password must be at least 8 characters long and contain at least one number.'
+      });
+    }
+
     // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
