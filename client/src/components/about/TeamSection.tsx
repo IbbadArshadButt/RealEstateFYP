@@ -8,13 +8,13 @@ const dummyTeam = [
     name: "Muhammad Asif",
     role: "Chief Executive Officer",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    description: "Leading Zameen with 20+ years of real estate experience."
+    description: "Leading REGAL ESTATE with 20+ years of real estate experience."
   },
   {
     name: "Ayesha Rahman",
     role: "Chief Technology Officer",
     image: "https://images.unsplash.com/photo-1494790108755-2616b612b742?w=300&h=300&fit=crop&crop=face",
-    description: "Driving innovation and technology advancement at Zameen."
+    description: "Driving innovation and technology advancement at REGAL ESTATE."
   },
   {
     name: "Hassan Ahmed",
@@ -38,7 +38,7 @@ const TeamSection = () => {
             name: agent.name,
             role: agent.role === 'agent' ? 'Real Estate Agent' : agent.role.charAt(0).toUpperCase() + agent.role.slice(1),
             image: agent.profileImage || agent.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(agent.name)}&background=random`,
-            description: `Experienced ${agent.role} at Zameen with expertise in real estate.`
+            description: `Experienced ${agent.role} at REGAL ESTATE with expertise in real estate.`
           }));
           setTeam(transformedAgents);
         }

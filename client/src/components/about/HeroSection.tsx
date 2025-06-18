@@ -18,7 +18,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative">
         <div className="max-w-4xl mx-auto text-center py-32">
           <h1 className="text-7xl font-bold mb-8 tracking-tight">
-            About Zameen
+            About REGAL ESTATE
           </h1>
           <p className="text-2xl md:text-3xl leading-relaxed text-white/90 max-w-3xl mx-auto font-light">
             Pakistan's leading real estate platform, connecting millions of people with their dream properties 

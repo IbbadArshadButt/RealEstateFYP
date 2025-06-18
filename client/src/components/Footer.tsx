@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">Zameen Echo</h3>
+            <h3 className="text-xl font-bold mb-4">REGAL ESTATE</h3>
             <p className="text-gray-400 mb-4">
               Pakistan's most trusted real estate platform, helping you find your perfect property since 2023.
             </p>
@@ -100,7 +100,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Zameen Echo. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} REGAL ESTATE. All rights reserved.</p>
         </div>
       </div>
     </footer>

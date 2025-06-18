@@ -51,21 +51,21 @@ const Contact = () => {
       city: "Karachi",
       address: "Plot 23, Sector 32-A, Korangi Industrial Area, Karachi",
       phone: "+92 21 111 111 456",
-      email: "karachi@zameen.com",
+      email: "karachi@regalestate.com",
       hours: "Mon - Sat: 9:00 AM - 7:00 PM"
     },
     {
       city: "Lahore",
       address: "28-C, Main Boulevard, Gulberg III, Lahore",
       phone: "+92 42 111 111 456",
-      email: "lahore@zameen.com",
+      email: "lahore@regalestate.com",
       hours: "Mon - Sat: 9:00 AM - 7:00 PM"
     },
     {
       city: "Islamabad",
       address: "House 54, Street 15, F-8/1, Islamabad",
       phone: "+92 51 111 111 456",
-      email: "islamabad@zameen.com",
+      email: "islamabad@regalestate.com",
       hours: "Mon - Sat: 9:00 AM - 7:00 PM"
     }
   ];
@@ -82,7 +82,7 @@ const Contact = () => {
       icon: Mail,
       title: "Email Us",
       description: "Send us an email and we'll respond within 24 hours",
-      contact: "support@zameen.com",
+      contact: "support@regalestate.com",
       action: "Send Email"
     },
     {

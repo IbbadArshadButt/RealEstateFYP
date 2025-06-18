@@ -209,7 +209,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="text-2xl font-bold text-green-600">
-            Zameen
+            REGAL ESTATE
           </Link>
           
           <nav className="hidden md:flex space-x-6">

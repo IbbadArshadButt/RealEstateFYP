@@ -43,8 +43,8 @@ const ReviewSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Share Your Experience</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Help others make informed decisions by sharing your experience with Zameen Echo
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">REGAL ESTATE
+            Help others make informed decisions by sharing your experience with 
           </p>
         </div>
 
@@ -99,7 +99,7 @@ const ReviewSection = () => {
                   required
                   className="w-full"
                   rows={4}
-                  placeholder="Share your experience with Zameen Echo..."
+                  placeholder="Share your experience with REGAL ESTATE..."
                 />
               </div>
 

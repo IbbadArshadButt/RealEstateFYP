@@ -26,7 +26,7 @@ const CTASection = () => {
             </h2>
             <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto">
               Whether you're buying, selling, or renting, our expert team is here to guide you every step of the way. 
-              Join millions of satisfied customers who have found their perfect properties with Zameen.
+              Join millions of satisfied customers who have found their perfect properties with REGAL ESTATE.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link to="/properties">

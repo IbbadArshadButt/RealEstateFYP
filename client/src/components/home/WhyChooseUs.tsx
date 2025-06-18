@@ -23,7 +23,7 @@ const WhyChooseUs = () => {
     <section className="py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 animate-[fadeIn_0.8s_ease-out]">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Why Choose Zameen Echo?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Why Choose REGAL ESTATE?</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             We make finding your perfect property simple and straightforward
           </p>

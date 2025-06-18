@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Basic route
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to Zameen Echo Homes API' });
+  res.json({ message: 'Welcome to REGAL ESTATE Homes API' });
 });
 
 // Catch-all handler for React app

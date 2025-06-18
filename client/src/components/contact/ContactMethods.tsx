@@ -20,10 +20,10 @@ const contactMethods = [
     icon: Mail,
     title: "Email Us",
     description: "Send us an email and we'll respond within 24 hours",
-    contact: "support@zameen.com",
+    contact: "support@regalestate.com",
     action: "Send Email",
     onClick: (contact: string) => {
-      window.location.href = `mailto:${contact}?subject=Inquiry from Zameen Echo Homes`;
+      window.location.href = `mailto:${contact}?subject=Inquiry from REGAL ESTATE Homes`;
     }
   },
   {

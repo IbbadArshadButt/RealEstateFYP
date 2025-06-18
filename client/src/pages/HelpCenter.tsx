@@ -81,7 +81,7 @@ const HelpCenter = () => {
           <Card className="text-center p-6 hover:shadow-lg transition-shadow">
             <Mail className="w-8 h-8 mx-auto mb-4 text-green-600" />
             <h3 className="font-semibold mb-2">Email Support</h3>
-            <p className="text-sm text-gray-600">support@zameen.com</p>
+            <p className="text-sm text-gray-600">support@regalestate.com</p>
           </Card>
           <Card className="text-center p-6 hover:shadow-lg transition-shadow">
             <MessageCircle className="w-8 h-8 mx-auto mb-4 text-green-600" />

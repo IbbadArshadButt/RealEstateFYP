@@ -11,7 +11,7 @@ const StorySection = () => {
             
             <div className="space-y-6 text-gray-600 leading-relaxed">
               <p className="text-lg">
-                Founded in 2006, Zameen started with a simple vision: to revolutionize the way people buy, 
+                Founded in 2006, REGAL ESTATE started with a simple vision: to revolutionize the way people buy, 
                 sell, and rent properties in Pakistan. What began as a small startup has now grown into the 
                 country's largest real estate platform.
               </p>

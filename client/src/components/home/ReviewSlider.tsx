@@ -16,7 +16,7 @@ const dummyReviews: Review[] = [
     _id: "dummy1",
     name: "Sarah Johnson",
     rating: 5,
-    comment: "Exceptional service! The team at Zameen Echo made finding my dream home a breeze. Their attention to detail and professional approach exceeded my expectations.",
+    comment: "Exceptional service! The team at REGAL ESTATE made finding my dream home a breeze. Their attention to detail and professional approach exceeded my expectations.",
     createdAt: new Date().toISOString()
   },
   {
@@ -87,7 +87,7 @@ const ReviewSlider = () => {
           </h2>
           <div className="w-20 h-1 bg-green-500 mx-auto mb-4 rounded-full"></div>
           <p className="text-lg text-gray-600 max-w-xl mx-auto leading-relaxed">
-            Read what our satisfied customers have to say about their experience with Zameen Echo
+            Read what our satisfied customers have to say about their experience with REGAL ESTATE Echo
           </p>
         </div>
 
