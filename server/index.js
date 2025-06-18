@@ -12,6 +12,7 @@ const propertyRoutes = require('./routes/properties');
 const uploadRoutes = require('./routes/upload');
 const reviewRoutes = require('./routes/reviews');
 const messageRoutes = require('./routes/messageRoutes');
+const favoriteRoutes = require('./routes/favorites');
 
 // Load environment variables
 dotenv.config();
@@ -51,6 +52,7 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/messages', messageRoutes);
+app.use('/api/favorites', favoriteRoutes);
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/dist')));

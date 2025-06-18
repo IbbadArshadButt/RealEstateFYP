@@ -20,6 +20,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Agents from "./pages/Agents";
 import HelpCenter from "@/pages/HelpCenter";
+import Favorites from "@/pages/Favorites";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,11 @@ const App = () => (
             <Route path="/profile" element={
               <ProtectedRoute>
                 <ProfileSettings />
+              </ProtectedRoute>
+            } />
+            <Route path="/favorites" element={
+              <ProtectedRoute>
+                <Favorites />
               </ProtectedRoute>
             } />
             <Route path="/help-center" element={<HelpCenter />} />

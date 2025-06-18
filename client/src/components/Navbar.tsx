@@ -22,7 +22,8 @@ import {
   LayoutDashboard,
   UserCog,
   ChevronDown,
-  Menu
+  Menu,
+  Heart
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -76,6 +77,12 @@ const Navbar = () => {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link to="/favorites" className="flex items-center gap-2 cursor-pointer">
+                  <Heart className="w-4 h-4" />
+                  <span>Favorites</span>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/profile" className="flex items-center gap-2 cursor-pointer">
                   <UserCog className="w-4 h-4" />
@@ -174,6 +181,12 @@ const Navbar = () => {
           )}
           {isAuthenticated && (
             <>
+              <DropdownMenuItem asChild>
+                <Link to="/favorites" className="flex items-center gap-2">
+                  <Heart className="w-4 h-4" />
+                  <span>Favorites</span>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/profile" className="flex items-center gap-2">
                   <UserCog className="w-4 h-4" />

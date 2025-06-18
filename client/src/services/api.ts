@@ -316,4 +316,47 @@ export const submitReview = async (review: ReviewSubmission): Promise<Review> =>
   }
 };
 
+// Favorites API
+export const favoriteAPI = {
+  getFavorites: async (): Promise<Property[]> => {
+    try {
+      const response = await api.get('/favorites');
+      return response.data;
+    } catch (error) {
+      console.error('Error getting favorites:', error);
+      throw error;
+    }
+  },
+
+  addToFavorites: async (propertyId: string): Promise<any> => {
+    try {
+      const response = await api.post('/favorites', { propertyId });
+      return response.data;
+    } catch (error) {
+      console.error('Error adding to favorites:', error);
+      throw error;
+    }
+  },
+
+  removeFromFavorites: async (propertyId: string): Promise<any> => {
+    try {
+      const response = await api.delete(`/favorites/${propertyId}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error removing from favorites:', error);
+      throw error;
+    }
+  },
+
+  checkFavorite: async (propertyId: string): Promise<{ isFavorite: boolean }> => {
+    try {
+      const response = await api.get(`/favorites/${propertyId}/check`);
+      return response.data;
+    } catch (error) {
+      console.error('Error checking favorite status:', error);
+      throw error;
+    }
+  }
+};
+
 export default api; 

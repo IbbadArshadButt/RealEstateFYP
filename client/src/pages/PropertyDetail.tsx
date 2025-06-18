@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
-import { propertyAPI } from "@/services/api";
+import { propertyAPI, favoriteAPI } from "@/services/api";
 import { Property } from "@/types";
 import { 
   MapPin, 
@@ -50,6 +50,7 @@ const PropertyDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [property, setProperty] = useState<Property | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -81,6 +82,13 @@ const PropertyDetail = () => {
         
         const data = await propertyAPI.getProperty(id);
         setProperty(data);
+        
+        // Check if property is favorited
+        const token = localStorage.getItem('token');
+        if (token) {
+          const { isFavorite } = await favoriteAPI.checkFavorite(id);
+          setIsFavorite(isFavorite);
+        }
       } catch (error: any) {
         console.error('Error loading property:', error);
         toast({
@@ -225,6 +233,78 @@ Notes: ${scheduleForm.notes}`
     }));
   };
 
+  const toggleFavorite = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast({
+          title: "Authentication Required",
+          description: "Please login to add properties to favorites",
+          variant: "destructive",
+        });
+        navigate('/login');
+        return;
+      }
+
+      if (isFavorite) {
+        await favoriteAPI.removeFromFavorites(id!);
+        setIsFavorite(false);
+        toast({
+          title: "Success",
+          description: "Property removed from favorites",
+        });
+      } else {
+        await favoriteAPI.addToFavorites(id!);
+        setIsFavorite(true);
+        toast({
+          title: "Success",
+          description: "Property added to favorites",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update favorites",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: property?.title || 'Property Details',
+          text: `Check out this property: ${property?.title}`,
+          url: window.location.href
+        });
+      } else {
+        // Fallback to copying to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Success",
+          description: "Link copied to clipboard",
+        });
+      }
+    } catch (error: any) {
+      console.error('Error sharing:', error);
+      // If sharing fails, fallback to copying to clipboard
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Success",
+          description: "Link copied to clipboard",
+        });
+      } catch (clipboardError) {
+        toast({
+          title: "Error",
+          description: "Failed to share or copy link",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
@@ -272,10 +352,26 @@ Notes: ${scheduleForm.notes}`
                   className="w-full h-96 object-cover"
                 />
                 <div className="absolute top-4 right-4 flex space-x-2">
-                  <Button size="sm" variant="ghost" className="bg-white/80 hover:bg-white">
-                    <Heart className="w-4 h-4" />
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="bg-white/80 hover:bg-white"
+                    onClick={toggleFavorite}
+                  >
+                    <Heart 
+                      className={`w-4 h-4 ${
+                        isFavorite 
+                          ? "text-red-500 fill-red-500" 
+                          : "text-gray-600"
+                      }`}
+                    />
                   </Button>
-                  <Button size="sm" variant="ghost" className="bg-white/80 hover:bg-white">
+                  <Button 
+                    size="sm" 
+                    variant="ghost" 
+                    className="bg-white/80 hover:bg-white"
+                    onClick={handleShare}
+                  >
                     <Share2 className="w-4 h-4" />
                   </Button>
                 </div>

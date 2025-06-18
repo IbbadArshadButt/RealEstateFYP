@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Bed, Bath, Car, Heart, Search, Filter, Loader2 } from "lucide-react";
 import { Link, useSearchParams } from "react-router-dom";
-import { propertyAPI } from "@/services/api";
+import { propertyAPI, favoriteAPI } from "@/services/api";
 import { Property } from "@/types";
 import { useToast } from "@/components/ui/use-toast";
 import Navbar from '@/components/Navbar';
@@ -23,6 +23,7 @@ const Properties = () => {
   const [propertyType, setPropertyType] = useState<string>(searchParams.get("type") || "all");
   const [bedrooms, setBedrooms] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("default");
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
   const { toast } = useToast();
 
   // Get agent ID from URL if present
@@ -30,6 +31,7 @@ const Properties = () => {
 
   useEffect(() => {
     loadProperties();
+    loadFavorites();
   }, [searchParams]);
 
   useEffect(() => {
@@ -78,6 +80,58 @@ const Properties = () => {
       setProperties([]);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const loadFavorites = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      const favProperties = await favoriteAPI.getFavorites();
+      setFavorites(new Set(favProperties.map((prop: Property) => prop._id)));
+    } catch (error) {
+      console.error('Error loading favorites:', error);
+    }
+  };
+
+  const toggleFavorite = async (propertyId: string) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        toast({
+          title: "Authentication Required",
+          description: "Please login to add properties to favorites",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      if (favorites.has(propertyId)) {
+        await favoriteAPI.removeFromFavorites(propertyId);
+        setFavorites(prev => {
+          const newFavorites = new Set(prev);
+          newFavorites.delete(propertyId);
+          return newFavorites;
+        });
+        toast({
+          title: "Success",
+          description: "Property removed from favorites",
+        });
+      } else {
+        await favoriteAPI.addToFavorites(propertyId);
+        setFavorites(prev => new Set([...prev, propertyId]));
+        toast({
+          title: "Success",
+          description: "Property added to favorites",
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to update favorites",
+        variant: "destructive",
+      });
     }
   };
 
@@ -286,23 +340,34 @@ const Properties = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProperties.map((property) => (
               <Card key={property._id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="relative">
-                  <img
-                    src={property.images[0] || "https://placehold.co/400x300?text=No+Image"}
-                    alt={property.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    className="absolute top-2 right-2 bg-white/80 hover:bg-white"
-                  >
-                    <Heart className="w-4 h-4" />
-                  </Button>
-                  <Badge className="absolute top-2 left-2 bg-green-600">
-                    {new Date(property.createdAt).getTime() > Date.now() - 7 * 24 * 60 * 60 * 1000 ? 'New' : property.type}
-                  </Badge>
-                </div>
+                <Link to={`/properties/${property._id}`}>
+                  <div className="relative h-48">
+                    <img
+                      src={property.images[0] || "https://placehold.co/600x400?text=No+Image"}
+                      alt={property.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <Button
+                        size="icon"
+                        variant="ghost"
+                        className="bg-white/80 hover:bg-white"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          toggleFavorite(property._id);
+                        }}
+                      >
+                        <Heart 
+                          className={`w-5 h-5 ${
+                            favorites.has(property._id) 
+                              ? "text-red-500 fill-red-500" 
+                              : "text-gray-600"
+                          }`} 
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </Link>
                 <CardHeader className="pb-2">
                   <div className="flex justify-between items-start">
                     <CardTitle className="text-lg">{property.title}</CardTitle>
